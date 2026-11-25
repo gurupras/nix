@@ -1280,7 +1280,7 @@ sockopt_impl!(
     libc::IPV6_DONTFRAG,
     bool
 );
-#[cfg(apple_targets)]
+#[cfg(target_os = "macos")]
 #[cfg(feature = "net")]
 sockopt_impl!(
     /// Get the utun interface name.
@@ -1978,14 +1978,14 @@ impl<'a> Set<'a, OsString> for SetOsString<'a> {
 }
 
 /// Getter for a `CString` value.
-#[cfg(apple_targets)]
+#[cfg(target_os = "macos")]
 #[cfg(feature = "net")]
 struct GetCString<T: AsMut<[u8]>> {
     len: socklen_t,
     val: MaybeUninit<T>,
 }
 
-#[cfg(apple_targets)]
+#[cfg(target_os = "macos")]
 #[cfg(feature = "net")]
 impl<T: AsMut<[u8]>> Get<CString> for GetCString<T> {
     fn uninit() -> Self {
